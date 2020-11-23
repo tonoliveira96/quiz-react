@@ -1,56 +1,66 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 // import { FiArrowRight } from "react-icons/fi";
 // import {Link} from 'react-router-dom';
-
-import Human from "../../images/human.svg";
 
 import ContainerCard from "../../components/ContainerCard";
 
 import { Container, CardQuiz } from "./styles";
 
-import QuestionConfig from "../../QuestionConfig";
+import QuestionConfig, { QuestionGroup2} from "../../QuestionConfig";
+import LeftBanner from "../../components/LeftBanner";
+import Card from "../../components/Card";
 
 const Landing: React.FC = () => {
   const [quiz, setQuiz] = useState([]);
 
-  useEffect(() => {
+  const [step, setStep] = useState(0);
 
-    const stepGroups = localStorage.getItem("@Quiz:StepGroups");
-    if (!stepGroups) {
-      localStorage.setItem(
-        "@Quiz:StepGroups",
-        JSON.stringify([{ StepGroup1: QuestionConfig }])
-      );
-    }
+  function nextStep() {
+    setStep(step + 1);
+  }
 
-    // const parsestepGroups = JSON.parse(stepGroups);
+  function previousStep() {
+    setStep(step - 1);
+  }
 
-    // setQuiz(parsestepGroups);
-    
-  }, [quiz, setQuiz]);
+  const handleClickQuiz = useCallback((questParam)=>{
+    console.log(questParam);
+    setQuiz(questParam);
+
+  },[])
+
 
   return (
     <Container>
       <h1>Welcome</h1>
       <ContainerCard>
-        <img src={Human} alt="Human" />
-
+        <LeftBanner />
         <CardQuiz>
-          {/* {quiz.map((data) => {
-            return (
-              <Link key={data[0]} to="/quiz">
-                {data}
-              </Link>
-            );
-          })} */}
-          <Link  to="/quiz">
-            StepGrou 1
-          </Link>
-
-          <hr />
-          <Link to="/manager">Manager Quiz</Link>
+          <button onClick={()=> handleClickQuiz(QuestionConfig)} >Step Group 1</button>
+          <button onClick={()=> handleClickQuiz(QuestionGroup2)}>Step Group 2</button>
         </CardQuiz>
+        { quiz && step < quiz.length ? (
+          <Card questions={quiz[step]}>
+            {step > 0 && (
+              <button onClick={previousStep} className="previous">
+                Previous
+              </button>
+            )}
+            <button onClick={nextStep} className="next">
+              Next
+            </button>
+          </Card>
+        ) : (
+          <Card>
+              <button onClick={previousStep} className="previous">
+                Previous
+              </button>
+              <button onClick={nextStep} className="next">
+                Submit
+              </button>
+          </Card>
+        )}
       </ContainerCard>
     </Container>
   );

@@ -1,39 +1,55 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ContainerCard from "../../components/ContainerCard";
-// import { FiArrowRight } from "react-icons/fi";
-// import {Link} from 'react-router-dom';
-
-import Human from "../../images/human.svg";
 
 import Card from "../../components/Card";
+import Header from "../../components/Header";
+import LeftBanner from "../../components/LeftBanner";
 
 import QuestionConfig from "../../QuestionConfig";
 
 import { Container } from "./styles";
-import Header from "../../components/Header";
 
 const Quiz: React.FC = () => {
-  const[step, setStep] = useState(0)
+  const [step, setStep] = useState(0);
 
   function nextStep() {
-    setStep(step+1)
+    setStep(step + 1);
   }
 
-  function previousStep() {}
+  function previousStep() {
+    setStep(step - 1);
+  }
+
+  useEffect(()=>{
+
+  },[])
 
   return (
     <Container>
       <Header title="Quiz" />
       <ContainerCard>
-        <img src={Human} alt="Human" />
-        <Card questions={QuestionConfig[step]} steps={QuestionConfig.length}>
-          <button onClick={previousStep}>Previous</button>
-          <button
-            onClick={nextStep}
-          >
-            Next
-          </button>
-        </Card>
+        <LeftBanner />
+        {step < QuestionConfig.length ? (
+          <Card questions={QuestionConfig[step]}>
+            {step > 0 && (
+              <button onClick={previousStep} className="previous">
+                Previous
+              </button>
+            )}
+            <button onClick={nextStep} className="next">
+              Next
+            </button>
+          </Card>
+        ) : (
+          <Card>
+              <button onClick={previousStep} className="previous">
+                Previous
+              </button>
+              <button onClick={nextStep} className="next">
+                Submit
+              </button>
+          </Card>
+        )}
       </ContainerCard>
     </Container>
   );

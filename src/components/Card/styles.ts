@@ -12,11 +12,15 @@ select {
     background-color: #fff;
     border: 1px solid #d9d9d9;
     border-radius: 4px;
-    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    font-size: 18px;
     width: 100%;
     height: 32px;
     list-style: none;
     padding: 0 11px;
+
+    option{
+      color: rgba(0, 0, 0, 0.65);
+    }
   }
 
 `;
@@ -28,8 +32,23 @@ export const ContainerButtons = styled.div `
 
   button {
     margin-left: 10px;
-    padding: 10px 15px;
-    height: 32px;
-    justify-content:center;
+    height: 42px;
+    padding: 0 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 18px;
+    box-shadow: none;
+    border: transparent;
+  }
+
+  button.next{
+    background: #44d62c;
+    color: #fff;
+  }
+
+  button.previous{
+    background-color: #fff;
+    border: 1px solid #44d62c;
+    color: #44d62c;
   }
 `
