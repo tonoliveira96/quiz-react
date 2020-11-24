@@ -11,7 +11,7 @@ interface ICardProps {
 interface IQuestionProps {
   id: number;
   question: string;
-  options: string[];
+  options: Object[];
 }
 
 const Card: React.FC<ICardProps> = ({ lastStep, questions, children }) => {
@@ -37,7 +37,7 @@ const Card: React.FC<ICardProps> = ({ lastStep, questions, children }) => {
 
               <select>
                 {val.options.map((opt: any, index: number) => {
-                  return <option key={index}>{opt}</option>;
+                  return <option key={index}>{opt.description}</option>;
                 })}
               </select>
             </animated.div>
