@@ -5,14 +5,13 @@ import "leaflet/dist/leaflet.css";
 
 import Routes from "./routes";
 
-const App: React.FC =()=> {
+const App: React.FC = () => {
   return (
     <>
-    <Routes>
+      <Routes />
       <GlobalStyle />
-    </Routes>
     </>
   );
-}
+};
 
 export default App;
