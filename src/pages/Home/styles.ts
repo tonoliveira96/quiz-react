@@ -1,4 +1,8 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+
+interface IQuizProps {
+  visibled: boolean;
+}
 
 export const Container = styled.div`
   display: flex;
@@ -8,25 +12,22 @@ export const Container = styled.div`
   flex-direction: column;
 `;
 
+export const CardQuiz = styled.div<IQuizProps>`
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  padding: 5px 30px;
+  text-align: center;
+  ${(props) =>
+    props.visibled ? css({ display: "" }) : css({ display: "none" })}
 
-
-export const CardQuiz = styled.div `
-display: flex;
-flex-direction: column;
-width: 400px;
-padding: 5px;
-border: 1px solid;
-text-align:center;
-
-button{
-  font-size: 18px;
-  background: #1890ff;
-  padding: 5px;
-  margin-top: 5px;
-  border: none;
-  border-radius: 4px;
-  color: #fff;
-}
-
+  button {
+    font-size: 18px;
+    background: #1890ff;
+    padding: 5px;
+    margin-top: 5px;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+  }
 `;
-

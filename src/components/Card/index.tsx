@@ -5,7 +5,7 @@ import PersonalQuestion from "../PersonalQuestion";
 import { Container, ContainerButtons } from "./styles";
 
 interface ICardProps {
-  quizId?: string;
+  lastStep?: boolean;
   questions?: any[];
 }
 interface IQuestionProps {
@@ -14,7 +14,7 @@ interface IQuestionProps {
   options: string[];
 }
 
-const Card: React.FC<ICardProps> = ({ quizId, questions, children }) => {
+const Card: React.FC<ICardProps> = ({ lastStep, questions, children }) => {
 
   const props = useSpring({
     opacity: 1,
@@ -25,10 +25,10 @@ const Card: React.FC<ICardProps> = ({ quizId, questions, children }) => {
 
   return (
     <Container>
-      {questions ?(
+      {questions && (
         questions.map((val: IQuestionProps, key: number) => {
-          console.log(val);
-          console.log(key);
+          // console.log(val);
+          // console.log(key);
           return (
             <animated.div key={key} style={{ ...props }}>
               <p>
@@ -42,9 +42,11 @@ const Card: React.FC<ICardProps> = ({ quizId, questions, children }) => {
               </select>
             </animated.div>
           );
-        })):(
-          <PersonalQuestion />
-        )}
+        }))}
+
+      {lastStep && (
+        <PersonalQuestion />
+      )}
       <ContainerButtons>
       {children}
       </ContainerButtons>

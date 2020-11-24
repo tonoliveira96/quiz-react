@@ -95,6 +95,16 @@ const QuestionGroup2 = [
         '$100,001+',
       ],
     },
+  ],
+  [
+    {
+      id: 5,
+      question: "How likely are you to recommend our brand to a friend?",
+      options:[
+        "Yes",
+        "No"
+      ]
+    }
   ]
 ]
 
