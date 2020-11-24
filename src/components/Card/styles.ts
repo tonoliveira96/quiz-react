@@ -4,8 +4,7 @@ export const Container = styled.div `
 display: flex;
 flex-direction: column;
 width: 400px;
-padding: 5px;
-border: 1px solid;
+padding: 10px;
 
 select {
     box-sizing: border-box;

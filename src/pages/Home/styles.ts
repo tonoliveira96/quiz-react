@@ -5,9 +5,10 @@ interface IQuizProps {
 }
 
 export const Container = styled.div`
-  display: flex;
   width: 100vw;
   height: 100vh;
+  display: flex;
+  
   align-items: center;
   flex-direction: column;
 `;

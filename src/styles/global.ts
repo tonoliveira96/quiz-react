@@ -12,8 +12,4 @@ body{
   background: #ebf2f5;
   font-size: 18px;
 }
-
-body, button, textarea{
-  font: 600 18px Nunito, sans-serif
-}
 `;

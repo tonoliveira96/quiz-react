@@ -49,7 +49,7 @@ const QuestionConfig = [
 ];
 
 
-const QuestionGroup2 = [
+const QuestionCondition = [
   [
     {
       id: 1,
@@ -108,6 +108,35 @@ const QuestionGroup2 = [
   ]
 ]
 
+const QuestGroup1 = [
+  [
+    {
+      id: 6,
+      question: "How do you rate your last experience with us?",
+      options:[
+        {
+          description: "Yes",
+          condition: "next"
+        },
+        {
+          description: "No",
+          condition: "next"
+        }
+      ]
+    }
+  ],
+  [
+    {
+      id: 7,
+      question: "How likely are you to recommend our brand to a friend?",
+      options:[
+        "Yes",
+        "No"
+      ]
+    }
+  ]
+]
+
 const personalQuestionConfig = {
   website: "What's your website?",
   name: 'whats your name?',
@@ -115,6 +144,6 @@ const personalQuestionConfig = {
   phoneNo: "What's your number?",
 };
 
-export { personalQuestionConfig, QuestionGroup2 };
+export { personalQuestionConfig, QuestionCondition, QuestGroup1 };
 
 export default QuestionConfig;

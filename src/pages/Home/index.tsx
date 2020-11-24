@@ -8,7 +8,8 @@ import Card from "../../components/Card";
 
 import { Container, CardQuiz } from "./styles";
 
-import QuestionConfig, { QuestionGroup2 } from "../../QuestionConfig";
+import QuestionConfig, { QuestionCondition } from "../../QuestionConfig";
+import ThankYou from "../../components/ThankYou";
 
 const Landing: React.FC = () => {
   const [quiz, setQuiz] = useState<any>([]);
@@ -34,6 +35,12 @@ const Landing: React.FC = () => {
     setShowCard(true);
   }
 
+  function handleFinish(){
+    return(
+      <ThankYou />
+    )
+  }
+
   function renderPersonalQuestion(step: number) {
     console.log(step);
     if (step !== 0 && step >= quiz.length) {
@@ -42,14 +49,12 @@ const Landing: React.FC = () => {
           <button onClick={previousStep} className="previous">
             Previous
           </button>
-          <button onClick={nextStep} className="next">
+          <button onClick={handleFinish} className="next">
             Submit
           </button>
         </Card>
       );
-    } else {
-      return;
-    }
+    } 
   }
 
   return (
@@ -61,7 +66,7 @@ const Landing: React.FC = () => {
           <button onClick={() => handleClickQuiz(QuestionConfig)}>
             Step Group 1
           </button>
-          <button onClick={() => handleClickQuiz(QuestionGroup2)}>
+          <button onClick={() => handleClickQuiz(QuestionCondition)}>
             Step Group 2
           </button>
         </CardQuiz>
