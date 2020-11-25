@@ -8,10 +8,14 @@ import Card from "../../components/Card";
 
 import { Container, CardQuiz } from "./styles";
 
-import QuestionConfig, { QuestionCondition } from "../../QuestionConfig";
+import QuestionConfig, {
+  QuestionCondition,
+  QuestGroup1,
+} from "../../QuestionConfig";
 import ThankYou from "../../components/ThankYou";
 
 const Landing: React.FC = () => {
+  const questionaries = [QuestionConfig, QuestionConfig, QuestGroup1];
   const [quiz, setQuiz] = useState<any>([]);
   const [showCard, setShowCard] = useState(true);
 
@@ -25,20 +29,22 @@ const Landing: React.FC = () => {
     setStep(step - 1);
   }
 
-  const handleClickQuiz = useCallback((questParam) => {
-    setQuiz(questParam);
-    setShowCard(false);
-  }, []);
-
   function handleBack() {
     setQuiz([]);
     setShowCard(true);
   }
 
-  function handleFinish(){
-    return(
-      <ThankYou />
-    )
+  function handleFinish() {
+    return <ThankYou />;
+  }
+
+  function verifyCondition(cond: string) {
+    questionaries.map((item, index) => {
+      console.log(cond)
+      if (index === Number(cond)) {
+       console.log("You got!!");
+      }
+    });
   }
 
   function renderPersonalQuestion(step: number) {
@@ -54,8 +60,13 @@ const Landing: React.FC = () => {
           </button>
         </Card>
       );
-    } 
+    }
   }
+
+  const handleClickQuiz = useCallback((questParam) => {
+    setQuiz(questParam);
+    setShowCard(false);
+  }, []);
 
   return (
     <Container>
@@ -71,7 +82,7 @@ const Landing: React.FC = () => {
           </button>
         </CardQuiz>
         {quiz && step < quiz.length ? (
-          <Card questions={quiz[step]}>
+          <Card questions={quiz[step]} >
             {step > 0 && (
               <button onClick={previousStep} className="previous">
                 Previous

@@ -15,7 +15,7 @@ const ThankYou: React.FC = () => {
   return (
     <Container>
       <animated.div style={props}>
-        <img className="mainImg" src={HandShake} alt="handshake" />
+        <img src={HandShake} alt="handshake" />
 
         <h2>Thank you!!</h2>
       </animated.div>

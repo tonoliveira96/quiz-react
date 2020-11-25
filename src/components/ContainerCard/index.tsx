@@ -2,12 +2,8 @@ import React from "react";
 
 import { Container } from "./styles";
 
-const ContainerCard : React.FC = ({ children }) => {
-  return (
-  <Container>
-    {children}
-  </Container>
-    );
+const ContainerCard: React.FC = ({ children }) => {
+  return <Container>{children}</Container>;
 };
 
 export default ContainerCard;

@@ -9,6 +9,8 @@ export const Container = styled.div`
   width: 100vw;
   height: 100vh;
   display: flex;
+  padding: 10px 30px;
+  min-width: 380px;
 
   align-items: center;
   justify-content: center;

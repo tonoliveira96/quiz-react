@@ -1,6 +1,12 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-export const Container = styled.div `
+export const Container = styled.div`
   display: flex;
-  margin-left: 24px;
+  align-items:center;
+  justify-content:center;
+
+  @media(max-width: 720px){
+    flex-direction:column;
+    margin: 10px 30px;
+  }
 `;

@@ -157,7 +157,7 @@ const QuestionCondition = [
       options: [
         {
           description: "Yes",
-          condition: "QuestGroup1"
+          condition: "2"
         },
         {
           description: "No",
