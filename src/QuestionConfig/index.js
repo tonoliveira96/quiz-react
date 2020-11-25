@@ -190,8 +190,14 @@ const QuestGroup1 = [
       id: 7,
       question: "How likely are you to recommend our brand to a friend?",
       options: [
-        "Yes",
-        "No"
+        {
+          description: "Yes",
+          condition: "next"
+        },
+        {
+          description: "No",
+          condition: "next"
+        }
       ]
     }
   ]

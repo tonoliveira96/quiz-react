@@ -1,6 +1,5 @@
 import React, { useCallback, useState } from "react";
 // import { FiArrowRight } from "react-icons/fi";
-// import {Link} from 'react-router-dom';
 
 import ContainerCard from "../../components/ContainerCard";
 import LeftBanner from "../../components/LeftBanner";
@@ -15,7 +14,13 @@ import QuestionConfig, {
 import ThankYou from "../../components/ThankYou";
 
 const Landing: React.FC = () => {
-  const questionaries = [QuestionConfig, QuestionConfig, QuestGroup1];
+  const questionaries = [
+    {
+      QuestionConfig: QuestionConfig,
+      QuestGroup1: QuestGroup1,
+    },
+  ];
+
   const [quiz, setQuiz] = useState<any>([]);
   const [showCard, setShowCard] = useState(true);
 
@@ -23,6 +28,12 @@ const Landing: React.FC = () => {
 
   function nextStep() {
     setStep(step + 1);
+    const nextQuizStep = sessionStorage.getItem("@NextStep");
+    if (nextQuizStep) {
+      setQuiz(QuestGroup1);
+      setStep(0);
+    }
+    sessionStorage.removeItem("@NextStep");
   }
 
   function previousStep() {
@@ -39,12 +50,15 @@ const Landing: React.FC = () => {
   }
 
   function verifyCondition(cond: string) {
-    questionaries.map((item, index) => {
-      console.log(cond)
-      if (index === Number(cond)) {
-       console.log("You got!!");
-      }
-    });
+    // questionaries.map((item, index) => {
+    //   console.log(cond);
+    //   if (index === Number(cond)) {
+    //     console.log("You got!!");
+    //   }
+    // });
+    if (cond !== "next") {
+      console.log("Next quiz is", cond);
+    }
   }
 
   function renderPersonalQuestion(step: number) {
@@ -82,7 +96,7 @@ const Landing: React.FC = () => {
           </button>
         </CardQuiz>
         {quiz && step < quiz.length ? (
-          <Card questions={quiz[step]} >
+          <Card questions={quiz[step]}>
             {step > 0 && (
               <button onClick={previousStep} className="previous">
                 Previous

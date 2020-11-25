@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSpring, animated } from "react-spring";
 import PersonalQuestion from "../PersonalQuestion";
 
@@ -12,15 +12,20 @@ interface ICardProps {
 interface IQuestionProps {
   id: number;
   question: string;
-  options:[
+  options: [
     {
-      description: string,
-      condition: string,
+      description: string;
+      condition: string;
     }
   ];
 }
 
-const Card: React.FC<ICardProps> = ({ lastStep, questions, verifyCondition, children }) => {
+const Card: React.FC<ICardProps> = ({
+  lastStep,
+  questions,
+  verifyCondition,
+  children,
+}) => {
   const props = useSpring({
     opacity: 1,
     delay: 400,
@@ -28,15 +33,17 @@ const Card: React.FC<ICardProps> = ({ lastStep, questions, verifyCondition, chil
     from: { opacity: 0, transform: "translateX(200px)" },
   });
 
-  const[ teste, setTeste] = useState("");
+  function saveNextStep(nextStep: string){
+    if(nextStep !== "next"){
+      sessionStorage.setItem("@NextStep", nextStep)
+    }
+  }
 
   return (
     <Container>
       {questions &&
         questions.map((val: IQuestionProps, key: number) => {
-          // console.log(val);
-          // console.log(key);
-          
+
           return (
             <animated.div key={key} style={{ ...props }}>
               <p>
@@ -45,16 +52,17 @@ const Card: React.FC<ICardProps> = ({ lastStep, questions, verifyCondition, chil
 
               <select
                 placeholder="Select a option"
-                onClick={()=>verifyCondition(teste)}
+                onChange={(e) => saveNextStep(e.target.value)}
               >
+                <option value=""/>
                 {val.options.map((opt: any, index: number) => {
-                  // opt.condition !== 'next' && setTeste(opt.condition)
                   return (
-                    <option key={index}>
-                      {opt.description}
-                    </option>
+                    <option
+                      key={index}
+                      label={opt.description}
+                      value={opt.condition}
+                    ></option>
                   );
-                  
                 })}
               </select>
             </animated.div>
