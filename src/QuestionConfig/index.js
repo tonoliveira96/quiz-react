@@ -4,55 +4,50 @@ const QuestionConfig = [
       id: 1,
       question: 'What are your goals?',
       options: [
-        'Get more conversions',
-        'Get more phone leads',
-        'Lower cost per conversion',
-        'All of the above',
-        'Other...',
+        {
+          description: 'Get more conversions',
+          condition: "next"
+        },
+        {
+          description: 'Get more phone leads',
+          condition: "next"
+        },
+        {
+          description: 'All of the above',
+          condition: "next"
+        },
+        {
+          description: 'Other...',
+          condition: "next"
+        },
       ],
     },
     {
       id: 2,
       question: 'Where do you advertise?',
       options: [
-        'Nationally',
-        'Locally',
-        'Internationally',
-        'Other...',
+        {
+          description: 'Nationally',
+          condition: "next"
+        },
+        {
+          description: 'Locally',
+          condition: "next"
+        },
+        {
+          description: 'Internationally',
+          condition: "next"
+        },
+        {
+          description: 'Other...',
+          condition: "next"
+        },
       ],
     },
   ],
   [
     {
       id: 3,
-      question: 'Do you want leads or sales?',
-      options: [
-        'Leads',
-        'Sales',
-        'Both, I sell a service and a product',
-        'Not sure',
-      ],
-    },
-    {
-      id: 4,
-      question: 'What’s your monthly PPC ad spend?',
-      options: [
-        '$0 - $1,000',
-        '$1,001 - $5,000',
-        '$5,001 - $25,00',
-        '$25,001 - $100,000',
-        '$100,001+',
-      ],
-    },
-  ]
-
-];
-
-
-const QuestionCondition = [
-  [
-    {
-      id: 1,
       question: 'Do you want leads or sales?',
       options: [
         {
@@ -74,7 +69,7 @@ const QuestionCondition = [
       ],
     },
     {
-      id: 2,
+      id: 4,
       question: 'What’s your monthly PPC ad spend?',
       options: [
         {
@@ -95,6 +90,57 @@ const QuestionCondition = [
         },
         {
           description: '$100,001+',
+          condition: "next"
+        },
+      ],
+    },
+  ]
+
+];
+
+
+const QuestionCondition = [
+  [
+    {
+      id: 1,
+      question: 'What are your goals?',
+      options: [
+        {
+          description: 'Get more conversions',
+          condition: "next"
+        },
+        {
+          description: 'Get more phone leads',
+          condition: "next"
+        },
+        {
+          description: 'All of the above',
+          condition: "next"
+        },
+        {
+          description: 'Other...',
+          condition: "next"
+        },
+      ],
+    },
+    {
+      id: 2,
+      question: 'Where do you advertise?',
+      options: [
+        {
+          description: 'Nationally',
+          condition: "next"
+        },
+        {
+          description: 'Locally',
+          condition: "next"
+        },
+        {
+          description: 'Internationally',
+          condition: "next"
+        },
+        {
+          description: 'Other...',
           condition: "next"
         },
       ],

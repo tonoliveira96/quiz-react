@@ -5,9 +5,13 @@ import PersonalQuestion from "../PersonalQuestion";
 import { Container, ContainerButtons } from "./styles";
 
 interface ICardProps {
-  lastStep?: boolean;
+  lastStep: boolean;
+  stepNumber: number;
   questions?: any[];
-  verifyCondition?: any;
+  nextStep?: any;
+  previousStep?: any;
+  handleBack?: any;
+  
 }
 interface IQuestionProps {
   id: number;
@@ -23,7 +27,10 @@ interface IQuestionProps {
 const Card: React.FC<ICardProps> = ({
   lastStep,
   questions,
-  verifyCondition,
+  nextStep,
+  previousStep,
+  stepNumber,
+  handleBack,
   children,
 }) => {
   const props = useSpring({
@@ -33,9 +40,9 @@ const Card: React.FC<ICardProps> = ({
     from: { opacity: 0, transform: "translateX(200px)" },
   });
 
-  function saveNextStep(nextStep: string){
-    if(nextStep !== "next"){
-      sessionStorage.setItem("@NextStep", nextStep)
+  function saveNextStep(nextStepQuiz: string) {
+    if (nextStepQuiz !== "next") {
+      sessionStorage.setItem("@NextStep", nextStepQuiz);
     }
   }
 
@@ -43,18 +50,19 @@ const Card: React.FC<ICardProps> = ({
     <Container>
       {questions &&
         questions.map((val: IQuestionProps, key: number) => {
-
           return (
-            <animated.div key={key} style={{ ...props }}>
-              <p>
+            <animated.div key={key} style={props}>
+              <h4>
                 {val.id} ) {val.question}
-              </p>
+              </h4>
 
               <select
                 placeholder="Select a option"
-                onChange={(e) => saveNextStep(e.target.value)}
+                onChange={(e) => {
+                  saveNextStep(e.target.value);
+                }}
               >
-                <option value=""/>
+                <option />
                 {val.options.map((opt: any, index: number) => {
                   return (
                     <option
@@ -69,8 +77,24 @@ const Card: React.FC<ICardProps> = ({
           );
         })}
 
-      {lastStep && <PersonalQuestion />}
-      <ContainerButtons>{children}</ContainerButtons>
+      {lastStep && <PersonalQuestion previousStep={previousStep} />}
+
+      <ContainerButtons>
+        {lastStep === false && stepNumber > 0 && (
+          <button onClick={previousStep} className="previous">
+            Previous
+          </button>
+        )}
+        {stepNumber === 0 && (
+          <button onClick={handleBack} className="next">
+            Back
+          </button>
+        )}
+        { !lastStep &&(<button onClick={nextStep} className="next">
+          Next
+        </button>)}
+      </ContainerButtons>
+      {children}
     </Container>
   );
 };

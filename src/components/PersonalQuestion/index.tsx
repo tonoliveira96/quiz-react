@@ -1,8 +1,11 @@
 import React from "react";
 
-import { Container } from "./styles";
+import { Container, ContainerButtons } from "./styles";
 
-const PersonalQuestion: React.FC = ({ children }) => {
+interface ICardProps {
+  previousStep: any;
+}
+const PersonalQuestion: React.FC<ICardProps> = ({ previousStep }) => {
   return (
     <Container>
       <h4>What's your website?</h4>
@@ -13,6 +16,19 @@ const PersonalQuestion: React.FC = ({ children }) => {
       <input type="text" />
       <h4>What's your number?</h4>
       <input type="text" />
+
+      <ContainerButtons>
+        {
+          <>
+            <button onClick={previousStep} className="previous">
+              Previous
+            </button>
+            <button onClick={() => {}} className="next">
+              Submit
+            </button>
+          </>
+        }
+      </ContainerButtons>
     </Container>
   );
 };

@@ -17,7 +17,7 @@ export const Container = styled.div`
   flex-direction: column;
 `;
 
-export const CardQuiz = styled.div<IQuizProps>`
+export const CardButtonQuiz = styled.div<IQuizProps>`
   display: flex;
   flex-direction: column;
   width: 400px;
