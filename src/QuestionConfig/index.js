@@ -203,7 +203,7 @@ const QuestionCondition = [
       options: [
         {
           description: "Yes",
-          condition: "2"
+          condition: "1"
         },
         {
           description: "No",
@@ -214,6 +214,72 @@ const QuestionCondition = [
   ]
 ]
 
+const QuestionConditionFood = [
+  [
+    {
+      id: 1,
+      question: 'What is your favorite type of food?',
+      options: [
+        {
+          description: 'Pizza',
+          condition: "next"
+        },
+        {
+          description: 'Sandwiches',
+          condition: "next"
+        },
+        {
+          description: 'Meat',
+          condition: "next"
+        },
+        {
+          description: 'Other...',
+          condition: "next"
+        },
+      ],
+    },
+    {
+      id: 2,
+      question: 'Where do you advertise?',
+      options: [
+        {
+          description: 'Nationally',
+          condition: "next"
+        },
+        {
+          description: 'Locally',
+          condition: "next"
+        },
+        {
+          description: 'Internationally',
+          condition: "next"
+        },
+        {
+          description: 'Other...',
+          condition: "next"
+        },
+      ],
+    },
+  ],
+  [
+    {
+      id: 3,
+      question: "Do you prefer delivery or going to a restaurant ?",
+      options: [
+        {
+          description: "Delivery",
+          condition: "2"
+        },
+        {
+          description: "Restaurant",
+          condition: "3"
+        }
+      ]
+    }
+  ]
+]
+
+
 const QuestGroup1 = [
   [
     {
@@ -221,11 +287,11 @@ const QuestGroup1 = [
       question: "How do you rate your last experience with us?",
       options: [
         {
-          description: "Yes",
+          description: "Great",
           condition: "next"
         },
         {
-          description: "No",
+          description: "Good",
           condition: "next"
         }
       ]
@@ -249,6 +315,80 @@ const QuestGroup1 = [
   ]
 ]
 
+const QuestGroup2 = [
+  [
+    {
+      id: 4,
+      question: "Do you consider fast delivery? ",
+      options: [
+        {
+          description: "Yes",
+          condition: "next"
+        },
+        {
+          description: "No",
+          condition: "next"
+        }
+      ]
+    }
+  ],
+  [
+    {
+      id: 5,
+      question: "How likely are you to recommend our brand to a friend?",
+      options: [
+        {
+          description: "Yes",
+          condition: "next"
+        },
+        {
+          description: "No",
+          condition: "next"
+        }
+      ]
+    }
+  ]
+]
+
+const QuestGroup3 = [
+  [
+    {
+      id: 4,
+      question: "How often do you go to restaurants? ",
+      options: [
+        {
+          description: "1 to 3 times a week",
+          condition: "next"
+        },
+        {
+          description: "4 to 5 times a week",
+          condition: "next"
+        },
+        {
+          description: "just on weekends",
+          condition: "next"
+        }
+      ]
+    }
+  ],
+  [
+    {
+      id: 5,
+      question: "How likely are you to recommend this restaurant to a friend?",
+      options: [
+        {
+          description: "It sure is the best",
+          condition: "next"
+        },
+        {
+          description: "Never",
+          condition: "next"
+        }
+      ]
+    }
+  ]
+]
+
 const personalQuestionConfig = {
   website: "What's your website?",
   name: 'whats your name?',
@@ -256,6 +396,13 @@ const personalQuestionConfig = {
   phoneNo: "What's your number?",
 };
 
-export { personalQuestionConfig, QuestionCondition, QuestGroup1 };
+export { 
+  personalQuestionConfig, 
+  QuestionCondition, 
+  QuestionConditionFood, 
+  QuestGroup1, 
+  QuestGroup2, 
+  QuestGroup3 
+};
 
 export default QuestionConfig;

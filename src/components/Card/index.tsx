@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { render } from 'react-dom';
 import { useSpring, animated } from "react-spring";
 import PersonalQuestion from "../PersonalQuestion";
 
@@ -33,6 +34,7 @@ const Card: React.FC<ICardProps> = ({
   handleBack,
   children,
 }) => {
+
   const props = useSpring({
     opacity: 1,
     delay: 400,
@@ -41,28 +43,30 @@ const Card: React.FC<ICardProps> = ({
   });
 
   function saveNextStep(nextStepQuiz: string) {
+
     if (nextStepQuiz !== "next") {
       sessionStorage.setItem("@NextStep", nextStepQuiz);
     }
   }
 
   return (
-    <Container>
+    <Container >
       {questions &&
-        questions.map((val: IQuestionProps, key: number) => {
+        questions.map((val: IQuestionProps, key: number) => {  
           return (
             <animated.div key={key} style={props}>
               <h4>
                 {val.id} ) {val.question}
               </h4>
 
-              <select
+              <select 
+                key={val.id}
                 placeholder="Select a option"
                 onChange={(e) => {
                   saveNextStep(e.target.value);
                 }}
               >
-                <option />
+                <option  />
                 {val.options.map((opt: any, index: number) => {
                   return (
                     <option
