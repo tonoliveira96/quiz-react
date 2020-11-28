@@ -4,8 +4,9 @@ import { Container, ContainerButtons } from "./styles";
 
 interface ICardProps {
   previousStep: any;
+  finalStep: any;
 }
-const PersonalQuestion: React.FC<ICardProps> = ({ previousStep }) => {
+const PersonalQuestion: React.FC<ICardProps> = ({ previousStep, finalStep }) => {
   return (
     <Container>
       <h4>What's your website?</h4>
@@ -23,7 +24,7 @@ const PersonalQuestion: React.FC<ICardProps> = ({ previousStep }) => {
             <button onClick={previousStep} className="previous">
               Previous
             </button>
-            <button onClick={() => {}} className="next">
+            <button onClick={finalStep} className="next">
               Submit
             </button>
           </>

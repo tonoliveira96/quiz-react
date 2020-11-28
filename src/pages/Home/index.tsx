@@ -14,6 +14,7 @@ import QuestionConfig, {
   QuestGroup2,
   QuestGroup3,
 } from "../../QuestionConfig";
+import ThankYou from "../../components/ThankYou";
 // import ThankYou from "../../components/ThankYou";
 
 const Landing: React.FC = () => {
@@ -26,6 +27,7 @@ const Landing: React.FC = () => {
 
   //ESCOLHE O GRUPO DE QUESTIONÁRIO BASEADO NA "CONDITION" DA RESPOSTA ANTERIOR
   function nextStep() {
+
     setCurrentStep(currentStep + 1);
     const nextQuizStep = sessionStorage.getItem("@NextStep");
 
@@ -46,7 +48,6 @@ const Landing: React.FC = () => {
         break;
     }
 
-    
     sessionStorage.removeItem("@NextStep");
   }
 
@@ -63,7 +64,13 @@ const Landing: React.FC = () => {
     console.log(step);
     if (step !== 0 && step >= quiz.length) {
       return (
-        <Card lastStep stepNumber={currentStep} previousStep={previousStep} />
+        <Card
+          lastStep
+          stepNumber={currentStep}
+          previousStep={previousStep}
+          questions={[]}
+          finalStep={finalStep}
+        />
       );
     }
   }
@@ -87,7 +94,7 @@ const Landing: React.FC = () => {
         folder: "IEAA6GKGI4RSVONQ",
       })
       .then(() => {
-        alert("your response has been submitted");
+        return <ThankYou />;
       });
   }, []);
 
