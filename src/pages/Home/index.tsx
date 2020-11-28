@@ -25,9 +25,11 @@ const Landing: React.FC = () => {
 
   const [lastQuiz, setLastQuiz] = useState();
 
+  const [questionsAnswered, setQuestionsAnswered] = useState([]);
+
   //ESCOLHE O GRUPO DE QUESTIONÁRIO BASEADO NA "CONDITION" DA RESPOSTA ANTERIOR
   function nextStep() {
-
+    setQuestionsAnswered([]);
     setCurrentStep(currentStep + 1);
     const nextQuizStep = sessionStorage.getItem("@NextStep");
 
@@ -67,6 +69,7 @@ const Landing: React.FC = () => {
         <Card
           lastStep
           stepNumber={currentStep}
+          questionsAnswered={[]}
           previousStep={previousStep}
           questions={[]}
           finalStep={finalStep}
@@ -80,13 +83,13 @@ const Landing: React.FC = () => {
     setShowCard(false);
   }, []);
 
-  const finalStep = useCallback((personalQuestions) => {
+  const finalStep = useCallback(async (personalQuestions) => {
     const apiData = personalQuestions;
 
     // ENDPOINT - VOCE DEVE MANTER ESSE ENDPOINT
     const endPoint = "https://fortodayapi.agencysavage.com/wrike-task";
     console.log(apiData);
-    axios
+    await axios
       .post(endPoint, {
         title: personalQuestions.name,
         description: apiData,
@@ -94,7 +97,8 @@ const Landing: React.FC = () => {
         folder: "IEAA6GKGI4RSVONQ",
       })
       .then(() => {
-        return <ThankYou />;
+        alert("Ihuuuul");
+        sessionStorage.clear()
       });
   }, []);
 
@@ -118,6 +122,7 @@ const Landing: React.FC = () => {
         {quiz && currentStep < quiz.length ? (
           <Card
             questions={quiz[currentStep]}
+            questionsAnswered={questionsAnswered}
             nextStep={nextStep}
             previousStep={previousStep}
             handleBack={handleBack}

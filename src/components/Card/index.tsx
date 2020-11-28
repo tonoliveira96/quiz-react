@@ -8,6 +8,7 @@ interface ICardProps {
   lastStep: boolean;
   stepNumber: number;
   questions: any[];
+  questionsAnswered: any[];
   nextStep?: any;
   previousStep?: any;
   finalStep?: any;
@@ -29,13 +30,12 @@ const Card: React.FC<ICardProps> = ({
   questions,
   nextStep,
   previousStep,
+  questionsAnswered,
   stepNumber,
   handleBack,
   finalStep,
   children,
 }) => {
-  const questionsAnswered: any[] = [];
-
   const [enableNext, setEnableNext] = useState(true);
 
   const props = useSpring({
@@ -51,7 +51,7 @@ const Card: React.FC<ICardProps> = ({
       answer: nextStepQuiz,
     };
 
-    disabledButton()
+    disabledButton();
 
     console.log(questionsAnswered);
     if (nextStepQuiz !== "next") {
@@ -59,52 +59,45 @@ const Card: React.FC<ICardProps> = ({
     }
   }
 
-  function handleBlur(elem: string) {
-    if(!elem){
-      return(<p>Erro</p>)
-    }
-  }
-
   function disabledButton() {
-    if(questionsAnswered.length === questions.length){
+    if (questionsAnswered.length === questions.length) {
       setEnableNext(false);
     }
   }
 
+  if (nextStep) {
+    console.log("clicou");
+  }
+
   return (
     <Container>
-      {questions.map((val: IQuestionProps, key: number) => {
-        return (
-          <animated.div key={key} style={props}>
-            <h4>
-              {val.id} ) {val.question}
-            </h4>
+      {questions.map((val: IQuestionProps, key: number) => (
+        <animated.div key={key} style={props}>
+          <h4>
+            {val.id} ) {val.question}
+          </h4>
 
-            <select
-              value={undefined}
-              onBlur={(e) => {
-                handleBlur(e.target.value);
-              }}
-              key={val.id}
-              placeholder="Select a option"
-              onChange={(e) => {
-                saveNextStep(e.target.value, key);
-              }}
-            >
-              <option />
-              {val.options.map((opt: any, index: number) => {
-                return (
-                  <option
-                    key={index}
-                    label={opt.description}
-                    value={opt.condition}
-                  ></option>
-                );
-              })}
-            </select>
-          </animated.div>
-        );
-      })}
+          <select
+            value={undefined}
+            key={val.id}
+            placeholder="Select a option"
+            onChange={(e) => {
+              saveNextStep(e.target.value, key);
+            }}
+          >
+            <option />
+            {val.options.map((opt: any, index: number) => {
+              return (
+                <option
+                  key={index}
+                  label={opt.description}
+                  value={opt.condition}
+                ></option>
+              );
+            })}
+          </select>
+        </animated.div>
+      ))}
 
       {lastStep && (
         <PersonalQuestion previousStep={previousStep} finalStep={finalStep} />
