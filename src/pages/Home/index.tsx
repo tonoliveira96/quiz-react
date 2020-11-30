@@ -1,11 +1,11 @@
 import React, { useCallback, useState } from "react";
-// import { FiArrowRight } from "react-icons/fi";
+import { useHistory } from "react-router-dom";
+
 import axios from "axios";
+
 import ContainerCard from "../../components/ContainerCard";
 import LeftBanner from "../../components/LeftBanner";
 import Card from "../../components/Card";
-
-import { Container, CardButtonQuiz } from "./styles";
 
 import QuestionConfig, {
   QuestionCondition,
@@ -14,12 +14,14 @@ import QuestionConfig, {
   QuestGroup2,
   QuestGroup3,
 } from "../../QuestionConfig";
-import ThankYou from "../../components/ThankYou";
-// import ThankYou from "../../components/ThankYou";
+
+import { Container, CardButtonQuiz } from "./styles";
 
 const Landing: React.FC = () => {
   const [quiz, setQuiz] = useState<any>([]);
+  const [titleQuiz, setTitleQuiz] = useState("Welcome");
   const [showCard, setShowCard] = useState(true);
+  const history = useHistory();
 
   const [currentStep, setCurrentStep] = useState(0);
 
@@ -55,11 +57,13 @@ const Landing: React.FC = () => {
 
   function previousStep() {
     setCurrentStep(currentStep - 1);
+    console.log(currentStep);
   }
 
   function handleBack() {
     setQuiz([]);
     setShowCard(true);
+    setTitleQuiz("Welcome");
   }
 
   function renderPersonalQuestion(step: number) {
@@ -81,15 +85,16 @@ const Landing: React.FC = () => {
   const handleClickQuiz = useCallback((questParam) => {
     setQuiz(questParam);
     setShowCard(false);
+    setTitleQuiz("Questions");
   }, []);
 
-  const finalStep = useCallback(async (personalQuestions) => {
+  function finalStep(personalQuestions: any) {
     const apiData = personalQuestions;
 
     // ENDPOINT - VOCE DEVE MANTER ESSE ENDPOINT
     const endPoint = "https://fortodayapi.agencysavage.com/wrike-task";
     console.log(apiData);
-    await axios
+    axios
       .post(endPoint, {
         title: personalQuestions.name,
         description: apiData,
@@ -97,15 +102,15 @@ const Landing: React.FC = () => {
         folder: "IEAA6GKGI4RSVONQ",
       })
       .then(() => {
-        alert("Ihuuuul");
-        sessionStorage.clear()
+        sessionStorage.clear();
+        history.push("/thankyou");
       });
-  }, []);
+  }
 
   return (
     <Container>
-      <h1>Welcome</h1>
-      <ContainerCard>
+      <h1>{titleQuiz}</h1>
+      <ContainerCard key="main">
         <LeftBanner />
         <CardButtonQuiz visibled={showCard}>
           <button onClick={() => handleClickQuiz(QuestionConfig)}>

@@ -13,13 +13,14 @@ const ThankYou: React.FC = () => {
     from: { opacity: 0, transform: "translateY(-400px)" },
   });
   return (
-    <Container>
-      <animated.div style={props}>
+    <animated.div style={props}>
+      <Container>
         <img src={HandShake} alt="handshake" />
 
         <h2>Thank you!!</h2>
-      </animated.div>
-    </Container>
+        <a href="/">Back to the start</a>
+      </Container>
+    </animated.div>
   );
 };
 

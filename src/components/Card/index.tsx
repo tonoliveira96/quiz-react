@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useSpring, animated } from "react-spring";
 import PersonalQuestion from "../PersonalQuestion";
 
@@ -45,6 +45,8 @@ const Card: React.FC<ICardProps> = ({
     from: { opacity: 0, transform: "translateX(200px)" },
   });
 
+  const selectItem = useRef(null);
+
   function saveNextStep(nextStepQuiz: string, key: number) {
     questionsAnswered[key] = {
       question: questions[key].question,
@@ -64,11 +66,7 @@ const Card: React.FC<ICardProps> = ({
       setEnableNext(false);
     }
   }
-
-  if (nextStep) {
-    console.log("clicou");
-  }
-
+  
   return (
     <Container>
       {questions.map((val: IQuestionProps, key: number) => (
@@ -78,6 +76,7 @@ const Card: React.FC<ICardProps> = ({
           </h4>
 
           <select
+            ref={selectItem}
             value={undefined}
             key={val.id}
             placeholder="Select a option"
