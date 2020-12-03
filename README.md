@@ -7,6 +7,9 @@
 3. Rode no terminal `yarn` para instalar todas as dependência.
 4. Rode `yarn start` para rodar o projeto.
 
+# Front-end
+<img src="https://raw.githubusercontent.com/tonoliveira96/quiz-react/master/assets/quiz-react.gif" alt="gif">
+
 # Dependências
   * axios
   * polished
