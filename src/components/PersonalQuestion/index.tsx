@@ -15,7 +15,7 @@ const PersonalQuestion: React.FC<ICardProps> = ({
   const questionsHandle = (answer: Object) => {
     Object.keys(questionsAnswered).length === 4 && setEnableSubmit(false) ;
     console.log(Object.keys(questionsAnswered).length)
-    
+
     if (answer) {
       questionsAnswered = Object.assign(questionsAnswered, answer);
       localStorage.setItem("personal", JSON.stringify(questionsAnswered));
@@ -53,7 +53,9 @@ const PersonalQuestion: React.FC<ICardProps> = ({
             <button onClick={previousStep} className="previous">
               Previous
             </button>
-            <button className="next" onClick={()=>finalStep(questionsAnswered)}>
+            <button 
+            disabled={enableSubmit}
+            className="next" onClick={()=>finalStep(questionsAnswered)}>
               Submit
             </button>
           </>
