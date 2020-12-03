@@ -34,6 +34,10 @@ export const ContainerButtons = styled.div`
     &:hover {
       background: ${shade(0.3, "#44d62c")};
     }
+    &:disabled {
+      background: #ccc;
+      opacity: 0.5;
+    }
   }
 
   button.previous {

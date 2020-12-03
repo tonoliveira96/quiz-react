@@ -7,11 +7,6 @@
 3. Rode no terminal `yarn` para instalar todas as dependência.
 4. Rode `yarn start` para rodar o projeto.
 
-# Front-end do desafio
-<div align="center">
-  
-</div>
-
 # Dependências
   * axios
   * polished

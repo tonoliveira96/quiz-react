@@ -27,18 +27,17 @@ const Landing: React.FC = () => {
 
   const [lastQuiz, setLastQuiz] = useState();
 
-  const [questionsAnswered, setQuestionsAnswered] = useState([]);
-
   //ESCOLHE O GRUPO DE QUESTIONÁRIO BASEADO NA "CONDITION" DA RESPOSTA ANTERIOR
   function nextStep() {
-    setQuestionsAnswered([]);
     setCurrentStep(currentStep + 1);
     const nextQuizStep = sessionStorage.getItem("@NextStep");
+    sessionStorage.removeItem("teste");
 
     if (nextQuizStep) {
       setCurrentStep(0);
       setLastQuiz(quiz);
     }
+    console.log(currentStep);
 
     switch (nextQuizStep) {
       case "1":
@@ -51,11 +50,15 @@ const Landing: React.FC = () => {
         setQuiz(QuestGroup3);
         break;
     }
-
     sessionStorage.removeItem("@NextStep");
+    return true;
   }
 
   function previousStep() {
+    if (lastQuiz && currentStep === 1) {
+      setQuiz(lastQuiz);
+      setCurrentStep(quiz.length);
+    }
     setCurrentStep(currentStep - 1);
     console.log(currentStep);
   }
@@ -73,7 +76,6 @@ const Landing: React.FC = () => {
         <Card
           lastStep
           stepNumber={currentStep}
-          questionsAnswered={[]}
           previousStep={previousStep}
           questions={[]}
           finalStep={finalStep}
@@ -88,24 +90,29 @@ const Landing: React.FC = () => {
     setTitleQuiz("Questions");
   }, []);
 
-  function finalStep(personalQuestions: any) {
+  const finalStep = useCallback((personalQuestions: any)=> {
+    history.push("/thankyou");
     const apiData = personalQuestions;
 
     // ENDPOINT - VOCE DEVE MANTER ESSE ENDPOINT
     const endPoint = "https://fortodayapi.agencysavage.com/wrike-task";
     console.log(apiData);
-    axios
-      .post(endPoint, {
-        title: personalQuestions.name,
-        description: apiData,
-        // FOLDER ID - VOCE DEVE MANTER ESSE FOLDER ID
-        folder: "IEAA6GKGI4RSVONQ",
-      })
-      .then(() => {
-        sessionStorage.clear();
-        history.push("/thankyou");
-      });
-  }
+    try {
+      axios
+        .post(endPoint, {
+          title: personalQuestions.name,
+          description: apiData,
+          // FOLDER ID - VOCE DEVE MANTER ESSE FOLDER ID
+          folder: "IEAA6GKGI4RSVONQ",
+        })
+        .then(() => {
+          localStorage.removeItem("personal");
+          
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  },[history])
 
   return (
     <Container>
@@ -124,10 +131,9 @@ const Landing: React.FC = () => {
           </button>
         </CardButtonQuiz>
 
-        {quiz && currentStep < quiz.length ? (
+        {currentStep < quiz.length ? (
           <Card
             questions={quiz[currentStep]}
-            questionsAnswered={questionsAnswered}
             nextStep={nextStep}
             previousStep={previousStep}
             handleBack={handleBack}
