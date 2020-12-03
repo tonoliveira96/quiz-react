@@ -1,5 +1,5 @@
 <h1>Quiz React</h1>
-<p>Desenvolvimento de um quiz usando ReactJS, neste quiz é possivel criar questionários fixos ou com váriaveis baseadona resposta, no arquivo `QueztionConfig/index.js` podemos cadastrar conditions para resposta, caso a conditição seja `next` o questionário segue para o próximo passo. Caso seja um número ele procura o grupo de questões referente aquele valor.</p>
+Desenvolvimento de um quiz usando ReactJS, neste quiz é possivel criar questionários fixos ou com váriaveis baseadona resposta, no arquivo `QuestionConfig/index.js` podemos cadastrar conditions para resposta, caso a conditição seja `next` o questionário segue para o próximo passo. Caso seja um número ele procura o grupo de questões referente aquele valor
 
 # Instalação
 1. Faça o clone deste repositório usando `git clone https://github.com/tonoliveira96/quiz-react.git`
