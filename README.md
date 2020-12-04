@@ -7,6 +7,11 @@ Desenvolvimento de um quiz usando ReactJS, neste quiz é possivel criar question
 3. Rode no terminal `yarn` para instalar todas as dependência.
 4. Rode `yarn start` para rodar o projeto.
 
+# Tempo de desenvolvimento
+
+Projeto iniciado no dia 21/11/2020 finalizado no dia 03/12/2020, tempo de trabalho em média de 2 hrs diárias.
+Total de horas do projeto: aproximadamente 26 hrs
+
 # Front-end
 <img src="https://raw.githubusercontent.com/tonoliveira96/quiz-react/master/assets/quiz-react.gif" alt="gif">
 
